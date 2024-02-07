@@ -1,18 +1,31 @@
 const express = require('express');
 const morgan = require('morgan');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+const mysql = require('mysql');
 const blogRoutes = require('./routes/blogRoutes');
-const {MongoClient} = require('mongodb')
 
 // express app
 const app = express();
 
-// connect to mongodb & listen for requests
-const dbURI = "mongodb://0.0.0.0:27017/";
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'blogs' 
+});
 
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(result => app.listen(3000))
-  .catch(err => console.log(err));
+
+db.connect((err) => {
+  if (err) {
+      console.log('Error connecting to MySQL:', err);
+  } else {
+      console.log('Connected to MySQL database');
+      app.listen(3000, () => {
+          console.log('Server is running on http://localhost:3000');
+      });
+  }
+});
+app.locals.db = db;
 
 // register view engine
 app.set('view engine', 'ejs');
