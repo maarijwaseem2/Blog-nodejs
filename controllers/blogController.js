@@ -1,4 +1,4 @@
-const Blog = require('../models/blog');
+const Blog = require('../models/blog.js');
 
 const blog_index = (req, res) => {
   const sql = 'SELECT * FROM blogs ORDER BY created_at DESC';

@@ -3,12 +3,12 @@ const blogController = require('../controllers/blogController');
 
 const router = express.Router();
 
-const mysql = require('mysql2');
+const mysql = require('mysql');
 const db = mysql.createConnection({
     host: 'localhost',          // Hostname
-    user: 'your_username',      // MySQL username
-    password: 'your_password',  // MySQL password
-    database: 'your_database'   // MySQL database name
+    user: 'root',      // MySQL username
+    password: '',  // MySQL password
+    database: 'blogs'   // MySQL database name
 });
 
 // Connect to MySQL
